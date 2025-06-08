@@ -1,0 +1,34 @@
+PROC chama_api_iframe
+
+    LOCAL url, jsonPost, respJson, dadosResp, iframe_html
+
+    url = "https://teste23.com.br/api_iframe_mv.php"
+
+    // Monta o JSON que será enviado (exemplo fixo, pode ser variável)
+    jsonPost = '{ "usuario": "JOAO", "atendimento": "123456", "prestador": "123" }'
+
+    // Faz a chamada POST (segundo parâmetro é o corpo)
+    respJson = WSCLIENT(url, "POST", jsonPost)
+
+    // Checa se recebeu algo
+    IF EMPTY(respJson)
+        MSGINFO("Erro: sem resposta da API.")
+        RETURN
+    ENDIF
+
+    // Converte JSON para variável nativa MVPEP (função JSONPARSE é a usual)
+    dadosResp = JSONPARSE(respJson)
+
+    IF HASKEY(dadosResp, "iframe")
+        iframe_html = dadosResp["iframe"]
+
+        // Aqui você pode usar iframe_html em um campo HTML da sua aplicação,
+        // ou em algum controle que aceite conteúdo HTML (exemplo fictício):
+        // SET_CAMPO_HTML("campo_iframe", iframe_html)
+        
+        MSGINFO("Iframe recebido com sucesso.")
+    ELSE
+        MSGINFO("Erro: resposta inesperada da API.")
+    ENDIF
+
+ENDP
