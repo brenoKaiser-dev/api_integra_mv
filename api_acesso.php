@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-define('CHAVE_SECRETA', 'uma-chave-secreta-de-32-bytes!!');
+define('CHAVE_SECRETA', 'dBq/OH6qc9EQzv36FIB/BTqpwTLGugNEUjZNkbBOUgw=');
 
 function criptografar($dados) {
     $json = json_encode($dados);
